@@ -15,37 +15,41 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* ── Blobs décoratifs ─────────────────────────────────── */
-    .blob {
+    /* ── Rectangles dégradés dans les coins ──────────────── */
+    .grad {
       position: fixed;
-      border-radius: 50%;
       pointer-events: none;
-      filter: blur(72px);
-      opacity: 0.28;
+      z-index: 0;
     }
 
-    /* Salmon — haut gauche */
-    .blob-salmon {
-      width: 520px; height: 520px;
-      background: #F07A5A;
-      top: -180px; left: -160px;
+    /* Salmon — coin haut-gauche */
+    .grad-tl {
+      top: 0; left: 0;
+      width: 42%; height: 52%;
+      background: linear-gradient(135deg,
+        rgba(240, 122, 90, .30) 0%,
+        transparent                70%);
     }
 
-    /* Lilas — haut droite */
-    .blob-lilas {
-      width: 460px; height: 460px;
-      background: #B8A9F0;
-      top: -150px; right: -140px;
+    /* Lilas — coin haut-droite */
+    .grad-tr {
+      top: 0; right: 0;
+      width: 40%; height: 48%;
+      background: linear-gradient(225deg,
+        rgba(184, 169, 240, .26) 0%,
+        transparent                70%);
     }
 
-    /* Mint — bas gauche */
-    .blob-mint {
-      width: 480px; height: 480px;
-      background: #7DE8C0;
-      bottom: -180px; left: -140px;
+    /* Mint — coin bas-gauche */
+    .grad-bl {
+      bottom: 0; left: 0;
+      width: 44%; height: 50%;
+      background: linear-gradient(315deg,
+        rgba(125, 232, 192, .24) 0%,
+        transparent                70%);
     }
 
-    /* ── Contenu centré ───────────────────────────────────── */
+    /* ── Contenu centré ──────────────────────────────────── */
     .splash-content {
       position: relative; z-index: 10;
       display: flex; flex-direction: column;
@@ -53,11 +57,11 @@
     }
 
     .logo-img {
-      height: 90px;
+      height: 80px;
       width: auto;
     }
 
-    /* ── Bouton ───────────────────────────────────────────── */
+    /* ── Bouton ──────────────────────────────────────────── */
     .btn-connect {
       font-family: 'Montserrat', sans-serif;
       font-size: .88rem; font-weight: 700;
@@ -65,21 +69,21 @@
       padding: 18px 64px; border-radius: 50px;
       background: #1B2A6B; color: #fff;
       border: none; cursor: pointer;
-      box-shadow: 0 6px 28px rgba(27, 42, 107, .30);
+      box-shadow: 0 6px 28px rgba(27, 42, 107, .28);
       transition: transform .25s, box-shadow .25s;
     }
     .btn-connect:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(27, 42, 107, .40);
+      box-shadow: 0 12px 36px rgba(27, 42, 107, .38);
     }
   </style>
 </head>
 <body>
 
-  <!-- Blobs décoratifs -->
-  <div class="blob blob-salmon"></div>
-  <div class="blob blob-lilas"></div>
-  <div class="blob blob-mint"></div>
+  <!-- Rectangles dégradés (pas de border-radius) -->
+  <div class="grad grad-tl"></div>
+  <div class="grad grad-tr"></div>
+  <div class="grad grad-bl"></div>
 
   <!-- Contenu -->
   <div class="splash-content">
