@@ -3,67 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hodos — Connexion</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <title>Hodos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+    }
+
     body {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Montserrat', sans-serif;
 
+      /*
+        3 radial-gradient positionnés aux coins du viewport :
+          - Salmon  : haut-gauche
+          - Lilas   : haut-droite
+          - Mint    : bas-gauche
+        Chaque ellipse part du coin (center at 0%/100%) et
+        s'estompe vers transparent. Fond blanc pur derrière.
+      */
       background:
-        radial-gradient(ellipse 55% 48% at 0%   0%,  rgba(240,122, 90,.28) 0%, rgba(240,122, 90,0) 70%),
-        radial-gradient(ellipse 52% 45% at 100%  0%,  rgba(184,169,240,.24) 0%, rgba(184,169,240,0) 70%),
-        radial-gradient(ellipse 60% 50% at 0%  100%,  rgba(125,232,192,.22) 0%, rgba(125,232,192,0) 70%),
-        radial-gradient(ellipse 48% 42% at 75% 100%,  rgba(125,232,192,.14) 0%, rgba(125,232,192,0) 65%),
+        radial-gradient(ellipse 40% 50% at   0%   0%, rgba(240, 122,  90, 0.30) 0%, rgba(240, 122,  90, 0) 100%),
+        radial-gradient(ellipse 38% 48% at 100%   0%, rgba(184, 169, 240, 0.26) 0%, rgba(184, 169, 240, 0) 100%),
+        radial-gradient(ellipse 55% 50% at   0% 100%, rgba(125, 232, 192, 0.25) 0%, rgba(125, 232, 192, 0) 100%),
         #ffffff;
     }
 
-    .splash-content {
+    /* ── Logo + bouton centrés ──────────────────────────── */
+    .wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 52px;
+      gap: 56px;
     }
 
     .logo-img {
       height: 80px;
       width: auto;
+      display: block;
     }
 
-    .btn-connect {
+    button {
       font-family: 'Montserrat', sans-serif;
-      font-size: .88rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      font-size: 0.85rem;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      padding: 18px 64px;
-      border-radius: 50px;
+      color: #ffffff;
       background: #1B2A6B;
-      color: #fff;
       border: none;
+      border-radius: 50px;
+      padding: 18px 62px;
       cursor: pointer;
-      box-shadow: 0 6px 28px rgba(27,42,107,.28);
-      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 20px rgba(27, 42, 107, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn-connect:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(27,42,107,.38);
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(27, 42, 107, 0.35);
     }
   </style>
 </head>
 <body>
-  <div class="splash-content">
+  <div class="wrap">
     <img class="logo-img" src="logo.png" alt="Hodos">
-    <button class="btn-connect" onclick="window.location.href='onboarding.html'">
-      SE CONNECTER
-    </button>
+    <button onclick="window.location.href='onboarding.html'">SE CONNECTER</button>
   </div>
 </body>
 </html>
