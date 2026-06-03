@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hodos — Mes compétences</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="index.html" class="hodos-logo">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+          <circle cx="28" cy="6" r="5" fill="white" stroke="none"/>
+          <path d="M28 11 A22 22 0 1 1 8 43" stroke="white" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M20 20 Q36 20 36 28 Q36 36 20 36" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="hodos-logo-text">Hodos</span>
+      </a>
+    </div>
+    <div class="navbar-center">
+      <a href="dashboard.html" class="nav-link">Formations</a>
+      <a href="dashboard.html" class="nav-link">Parcours</a>
+      <a href="competences.html" class="nav-profile" aria-label="Mon profil">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
+      </a>
+      <a href="competences.html" class="nav-link active">Compétences</a>
+      <a href="manager.html" class="nav-link">Manager</a>
+      <a href="#" class="nav-link">Calendrier</a>
+    </div>
+    <div class="navbar-right">
+      <button class="theme-toggle" onclick="toggleTheme()" style="position:static;" aria-label="Changer le thème">
+        <span class="theme-toggle-icon">🌙</span>
+        <span class="theme-toggle-label">Mode sombre</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Page ─────────────────────────────────────────────── -->
+  <div class="page-wrapper">
+    <div class="bg-deco" aria-hidden="true">
+      <div class="deco-tl"></div>
+      <div class="deco-tr"></div>
+      <div class="deco-br"></div>
+    </div>
+
+    <div class="content">
+
+      <!-- Header row -->
+      <div class="flex items-center justify-between mb-8" style="flex-wrap:wrap;gap:12px;">
+        <div>
+          <h1 class="page-title">Mes compétences</h1>
+          <p class="page-sub">Votre parcours d'apprentissage en un coup d'œil</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:.8rem;color:var(--text-secondary);font-weight:600;">Thomas Renard</p>
+          <p style="font-size:.72rem;color:var(--text-muted);font-weight:500;">Ingénieur Systèmes · Safran Engineering</p>
+        </div>
+      </div>
+
+      <!-- XP Bar -->
+      <div class="xp-card">
+        <div class="xp-header">
+          <span class="xp-level">⭐ Niveau 3 — Explorateur Confirmé</span>
+          <span class="xp-pts">2 340 XP</span>
+        </div>
+        <div class="xp-bar">
+          <div class="xp-fill" data-w="78%"></div>
+        </div>
+        <div class="xp-sub">
+          <span>Niveau 3</span>
+          <span>2 340 / 3 000 XP — prochain niveau : Expert Débutant</span>
+          <span>Niveau 4</span>
+        </div>
+      </div>
+
+      <!-- Badges grid -->
+      <h2 class="section-title">Badges obtenus</h2>
+      <div class="badges-grid">
+
+        <!-- Unlocked -->
+        <div class="badge-card unlocked">
+          <div class="badge-icon bi-mint">🚀</div>
+          <p class="badge-name">Digital Pioneer</p>
+          <p class="badge-desc">3 formations Digital terminées</p>
+        </div>
+
+        <div class="badge-card unlocked">
+          <div class="badge-icon bi-lilas">📋</div>
+          <p class="badge-name">Agile Master</p>
+          <p class="badge-desc">Certification Scrum validée</p>
+        </div>
+
+        <div class="badge-card unlocked">
+          <div class="badge-icon bi-salmon">🗣</div>
+          <p class="badge-name">Communicant Pro</p>
+          <p class="badge-desc">5 présentations réalisées</p>
+        </div>
+
+        <div class="badge-card unlocked">
+          <div class="badge-icon bi-mint">🌍</div>
+          <p class="badge-name">Anglais B2</p>
+          <p class="badge-desc">Niveau CECRL atteint</p>
+        </div>
+
+        <div class="badge-card unlocked">
+          <div class="badge-icon bi-navy">🎓</div>
+          <p class="badge-name">Onboarding Star</p>
+          <p class="badge-desc">Parcours d'intégration 100%</p>
+        </div>
+
+        <!-- Locked -->
+        <div class="badge-card locked">
+          <div class="badge-icon bi-lilas">🏗</div>
+          <p class="badge-name">Tech Lead</p>
+          <p class="badge-desc">Débloquez 5 formations Technique</p>
+        </div>
+
+        <div class="badge-card locked">
+          <div class="badge-icon bi-salmon">💡</div>
+          <p class="badge-name">Innovation Award</p>
+          <p class="badge-desc">Proposez 3 idées validées</p>
+        </div>
+
+        <div class="badge-card locked">
+          <div class="badge-icon bi-navy">🔗</div>
+          <p class="badge-name">Full Stack</p>
+          <p class="badge-desc">Maîtrisez 4 domaines différents</p>
+        </div>
+
+      </div><!-- /badges-grid -->
+
+      <!-- Skills in progress -->
+      <h2 class="section-title">Compétences en cours d'acquisition</h2>
+      <div class="skills-progress">
+
+        <div class="skill-row">
+          <div class="skill-head">
+            <span class="skill-name">🐳 Conteneurisation &amp; Docker</span>
+            <span class="skill-pct">52%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill sf-mint" data-w="52%"></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-head">
+            <span class="skill-name">☸️ Orchestration Kubernetes</span>
+            <span class="skill-pct">18%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill sf-lilas" data-w="18%"></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-head">
+            <span class="skill-name">🔒 Cybersécurité — fondamentaux</span>
+            <span class="skill-pct">35%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill sf-salmon" data-w="35%"></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-head">
+            <span class="skill-name">🐍 Python pour l'ingénierie des données</span>
+            <span class="skill-pct">10%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill sf-mint" data-w="10%"></div>
+          </div>
+        </div>
+
+      </div><!-- /skills-progress -->
+
+    </div><!-- /content -->
+  </div><!-- /page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>

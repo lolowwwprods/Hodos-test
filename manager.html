@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hodos — Vue Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .overview-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-bottom: 36px; }
+    .ov-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: 18px; padding: 22px 20px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .ov-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .ov-val  { font-size: 1.9rem; font-weight: 800; color: var(--navy); }
+    [data-theme="dark"] .ov-val { color: var(--lilas); }
+    .ov-lbl  { font-size: .75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .8px; }
+    .ov-sub  { font-size: .7rem; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+    @media (max-width: 900px) { .overview-cards { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="index.html" class="hodos-logo">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+          <circle cx="28" cy="6" r="5" fill="white" stroke="none"/>
+          <path d="M28 11 A22 22 0 1 1 8 43" stroke="white" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M20 20 Q36 20 36 28 Q36 36 20 36" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="hodos-logo-text">Hodos</span>
+      </a>
+    </div>
+    <div class="navbar-center">
+      <a href="dashboard.html" class="nav-link">Formations</a>
+      <a href="dashboard.html" class="nav-link">Parcours</a>
+      <a href="competences.html" class="nav-profile" aria-label="Mon profil">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
+      </a>
+      <a href="competences.html" class="nav-link">Compétences</a>
+      <a href="manager.html" class="nav-link active">Manager</a>
+      <a href="#" class="nav-link">Calendrier</a>
+    </div>
+    <div class="navbar-right">
+      <button class="theme-toggle" onclick="toggleTheme()" style="position:static;" aria-label="Changer le thème">
+        <span class="theme-toggle-icon">🌙</span>
+        <span class="theme-toggle-label">Mode sombre</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Page ─────────────────────────────────────────────── -->
+  <div class="page-wrapper">
+    <div class="bg-deco" aria-hidden="true">
+      <div class="deco-tl"></div>
+      <div class="deco-tr"></div>
+      <div class="deco-br"></div>
+    </div>
+
+    <div class="content">
+
+      <div class="flex items-center justify-between mb-8" style="flex-wrap:wrap;gap:12px;">
+        <div>
+          <h1 class="page-title">Vue Manager</h1>
+          <p class="page-sub">Suivez la progression de votre équipe en temps réel</p>
+        </div>
+        <button class="btn-outline" onclick="showToast('📧 Rapport envoyé par e-mail !')">
+          Exporter le rapport
+        </button>
+      </div>
+
+      <!-- Overview KPIs -->
+      <div class="overview-cards">
+        <div class="ov-card">
+          <div class="ov-icon">👥</div>
+          <p class="ov-val">5</p>
+          <p class="ov-lbl">Collaborateurs</p>
+          <p class="ov-sub">dans votre équipe</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-icon">📈</div>
+          <p class="ov-val">48%</p>
+          <p class="ov-lbl">Progression moy.</p>
+          <p class="ov-sub">+12% ce mois-ci</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-icon">✅</div>
+          <p class="ov-val">2</p>
+          <p class="ov-lbl">Formations terminées</p>
+          <p class="ov-sub">ce trimestre</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-icon">⚠️</div>
+          <p class="ov-val">2</p>
+          <p class="ov-lbl">Alertes inactivité</p>
+          <p class="ov-sub">&gt; 7 jours sans avancer</p>
+        </div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="alert-strip mb-6">
+        <span style="font-size:1.1rem;">⚠️</span>
+        <strong>Alertes inactivité :</strong>
+        <span>Sophie Martin (8 jours sans activité)</span>
+        <span style="opacity:.4">·</span>
+        <span>Emma Lefebvre (15 jours — pas encore commencé)</span>
+        <button onclick="showToast('📨 Relance envoyée à Sophie Martin et Emma Lefebvre')" style="margin-left:auto;background:var(--salmon);color:#fff;border:none;border-radius:8px;padding:5px 14px;font-family:Montserrat,sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;">
+          Envoyer une relance
+        </button>
+      </div>
+
+      <!-- Two columns: table + chart -->
+      <div class="two-col">
+
+        <!-- ── Team table ── -->
+        <div>
+          <!-- Filter tabs -->
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">Tous</button>
+            <button class="filter-tab" data-filter="active">En cours</button>
+            <button class="filter-tab" data-filter="done">Terminé</button>
+            <button class="filter-tab" data-filter="none">Pas commencé</button>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="manager-table">
+              <thead>
+                <tr>
+                  <th>Collaborateur</th>
+                  <th>Formation en cours</th>
+                  <th>Progression</th>
+                  <th>Dernière connexion</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr class="m-row" data-status="active">
+                  <td><span class="collab-name">Marie Dupont</span></td>
+                  <td style="max-width:160px;font-size:.8rem;">DevOps &amp; CI/CD</td>
+                  <td class="prog-cell">
+                    <span style="font-weight:700;">65%</span>
+                    <div class="prog-sm"><div class="prog-sm-fill psf-mint" data-w="65%"></div></div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--text-secondary);">Il y a 2 jours</td>
+                  <td><span class="st-pill sp-active">En cours</span></td>
+                </tr>
+
+                <tr class="m-row" data-status="active">
+                  <td><span class="collab-name">Thomas Bernard</span></td>
+                  <td style="max-width:160px;font-size:.8rem;">Management Agile</td>
+                  <td class="prog-cell">
+                    <span style="font-weight:700;">90%</span>
+                    <div class="prog-sm"><div class="prog-sm-fill psf-lilas" data-w="90%"></div></div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--text-secondary);">Hier</td>
+                  <td><span class="st-pill sp-done">Bientôt terminé</span></td>
+                </tr>
+
+                <tr class="m-row" data-status="active">
+                  <td>
+                    <span class="collab-name">Sophie Martin</span>
+                    <span style="display:inline-block;background:rgba(240,122,90,.15);color:var(--salmon);font-size:.6rem;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:6px;">⚠</span>
+                  </td>
+                  <td style="max-width:160px;font-size:.8rem;">Anglais technique</td>
+                  <td class="prog-cell">
+                    <span style="font-weight:700;">20%</span>
+                    <div class="prog-sm"><div class="prog-sm-fill psf-salmon" data-w="20%"></div></div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--salmon);font-weight:600;">Il y a 8 jours ⚠</td>
+                  <td><span class="st-pill sp-inactive">Inactif</span></td>
+                </tr>
+
+                <tr class="m-row" data-status="active">
+                  <td><span class="collab-name">Lucas Petit</span></td>
+                  <td style="max-width:160px;font-size:.8rem;">Cybersécurité</td>
+                  <td class="prog-cell">
+                    <span style="font-weight:700;">45%</span>
+                    <div class="prog-sm"><div class="prog-sm-fill psf-mint" data-w="45%"></div></div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--text-secondary);">Il y a 4 jours</td>
+                  <td><span class="st-pill sp-active">En cours</span></td>
+                </tr>
+
+                <tr class="m-row" data-status="none">
+                  <td>
+                    <span class="collab-name">Emma Lefebvre</span>
+                    <span style="display:inline-block;background:rgba(240,122,90,.15);color:var(--salmon);font-size:.6rem;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:6px;">⚠</span>
+                  </td>
+                  <td style="max-width:160px;font-size:.8rem;color:var(--text-muted);">—</td>
+                  <td class="prog-cell">
+                    <span style="font-weight:700;color:var(--text-muted);">0%</span>
+                    <div class="prog-sm"><div class="prog-sm-fill psf-light" data-w="0%"></div></div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--salmon);font-weight:600;">Il y a 15 jours ⚠</td>
+                  <td><span class="st-pill sp-none">Pas commencé</span></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── Bar chart ── -->
+        <div>
+          <div class="chart-card">
+            <h3 class="section-title" style="margin-bottom:4px;">Progression de l'équipe</h3>
+            <p style="font-size:.75rem;color:var(--text-secondary);font-weight:500;margin-bottom:0;">Taux de complétion par collaborateur (%)</p>
+            <div class="chart-bar-area">
+
+              <div class="bar-group">
+                <div class="bar-wrap">
+                  <div class="chart-bar" data-pct="65" data-v="65%"></div>
+                </div>
+                <p class="bar-lbl">Marie D.</p>
+              </div>
+
+              <div class="bar-group">
+                <div class="bar-wrap">
+                  <div class="chart-bar" data-pct="90" data-v="90%"></div>
+                </div>
+                <p class="bar-lbl">Thomas B.</p>
+              </div>
+
+              <div class="bar-group">
+                <div class="bar-wrap">
+                  <div class="chart-bar" data-pct="20" data-v="20%" style="background:var(--salmon);"></div>
+                </div>
+                <p class="bar-lbl">Sophie M.</p>
+              </div>
+
+              <div class="bar-group">
+                <div class="bar-wrap">
+                  <div class="chart-bar" data-pct="45" data-v="45%"></div>
+                </div>
+                <p class="bar-lbl">Lucas P.</p>
+              </div>
+
+              <div class="bar-group">
+                <div class="bar-wrap">
+                  <div class="chart-bar" data-pct="0" data-v="0%" style="background:var(--border);min-height:4px;height:4px!important;"></div>
+                </div>
+                <p class="bar-lbl">Emma L.</p>
+              </div>
+
+            </div>
+            <!-- Y-axis labels -->
+            <div style="display:flex;justify-content:space-between;margin-top:12px;padding:0 2px;">
+              <span style="font-size:.65rem;color:var(--text-muted);font-weight:500;">0%</span>
+              <span style="font-size:.65rem;color:var(--text-muted);font-weight:500;">25%</span>
+              <span style="font-size:.65rem;color:var(--text-muted);font-weight:500;">50%</span>
+              <span style="font-size:.65rem;color:var(--text-muted);font-weight:500;">75%</span>
+              <span style="font-size:.65rem;color:var(--text-muted);font-weight:500;">100%</span>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div style="margin-top:20px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:16px;padding:18px 20px;">
+            <p class="section-title" style="font-size:.85rem;margin-bottom:12px;">Résumé équipe</p>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="flex items-center justify-between">
+                <span style="font-size:.8rem;font-weight:600;color:var(--text-secondary);">Progression moyenne</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--text-primary);">44 %</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span style="font-size:.8rem;font-weight:600;color:var(--text-secondary);">Formations terminées</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--mint);">2 / 5</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span style="font-size:.8rem;font-weight:600;color:var(--text-secondary);">Heures de formation</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--text-primary);">38 h</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span style="font-size:.8rem;font-weight:600;color:var(--text-secondary);">Taux d'engagement</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--lilas);">60 %</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /chart column -->
+
+      </div><!-- /two-col -->
+    </div><!-- /content -->
+  </div><!-- /page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>

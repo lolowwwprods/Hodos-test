@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hodos — Connexion</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Splash-specific overrides */
+    body { margin: 0; }
+  </style>
+</head>
+<body class="splash-page">
+
+  <!-- Decorative shapes (swap via CSS based on theme) -->
+  <div class="sp-blob1"></div>
+  <div class="sp-blob2"></div>
+  <div class="sp-blob3"></div>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer le thème">
+    <span class="theme-toggle-icon">🌙</span>
+    <span class="theme-toggle-label">Mode sombre</span>
+  </button>
+
+  <!-- Main splash content -->
+  <div class="splash-content">
+
+    <!-- Logo -->
+    <div class="splash-logo">
+      <a href="#" class="hodos-logo" aria-label="Hodos">
+        <!-- Icon SVG -->
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="72" height="72" aria-hidden="true">
+          <circle cx="28" cy="6" r="5" fill="currentColor" stroke="none"/>
+          <path d="M28 11 A22 22 0 1 1 8 43" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M20 20 Q36 20 36 28 Q36 36 20 36" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="hodos-logo-text">Hodos</span>
+      </a>
+    </div>
+
+    <!-- CTA -->
+    <button class="btn-connect" onclick="goToOnboarding()">SE CONNECTER</button>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Mark as visited after connecting
+    function goToOnboarding() {
+      const visited = localStorage.getItem('hodos-visited');
+      localStorage.setItem('hodos-visited', '1');
+      window.location.href = visited ? 'dashboard.html' : 'onboarding.html';
+    }
+  </script>
+</body>
+</html>

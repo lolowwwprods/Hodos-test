@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hodos — Formation</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .formation-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+    .sticky-sidebar    { position: sticky; top: 96px; }
+    @media (max-width: 900px) { .formation-layout { grid-template-columns: 1fr; } .sticky-sidebar { position: static; } }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="index.html" class="hodos-logo">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+          <circle cx="28" cy="6" r="5" fill="white" stroke="none"/>
+          <path d="M28 11 A22 22 0 1 1 8 43" stroke="white" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M20 20 Q36 20 36 28 Q36 36 20 36" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="hodos-logo-text">Hodos</span>
+      </a>
+    </div>
+    <div class="navbar-center">
+      <a href="dashboard.html" class="nav-link active">Formations</a>
+      <a href="dashboard.html" class="nav-link">Parcours</a>
+      <a href="competences.html" class="nav-profile" aria-label="Mon profil">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
+      </a>
+      <a href="competences.html" class="nav-link">Compétences</a>
+      <a href="manager.html" class="nav-link">Manager</a>
+      <a href="#" class="nav-link">Calendrier</a>
+    </div>
+    <div class="navbar-right">
+      <button class="theme-toggle" onclick="toggleTheme()" style="position:static;" aria-label="Changer le thème">
+        <span class="theme-toggle-icon">🌙</span>
+        <span class="theme-toggle-label">Mode sombre</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Formation header (navy band) ─────────────────────── -->
+  <header class="formation-header">
+    <div class="fh-inner">
+      <div class="fh-tag">
+        <span class="card-tag tag-digital" style="margin-bottom:0">Digital</span>
+      </div>
+      <h1 class="fh-title">Introduction au DevOps &amp; CI/CD</h1>
+      <div class="fh-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          4h 30min
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          7 modules
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Sophie Leclerc · Expert DevOps
+        </span>
+      </div>
+      <div class="fh-progress">
+        <div class="fh-prog-bar">
+          <div class="fh-prog-fill" data-w="65%" id="fh-prog"></div>
+        </div>
+        <span class="fh-prog-label">65% complété</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Page content ─────────────────────────────────────── -->
+  <div class="page-wrapper">
+    <div class="bg-deco" aria-hidden="true">
+      <div class="deco-tl"></div>
+      <div class="deco-tr"></div>
+      <div class="deco-br"></div>
+    </div>
+
+    <div class="content">
+      <div class="formation-layout">
+
+        <!-- Left column: video + description -->
+        <div>
+
+          <!-- Timer + Module suivant row -->
+          <div class="flex items-center justify-between mb-6" style="flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <button class="timer-widget" id="timer-widget" onclick="toggleTimer()" aria-label="Activer le mode 10 minutes">
+                <div class="timer-dot"></div>
+                <span class="timer-label">Mode 10 min</span>
+                <span class="timer-val" id="timer-val">10:00</span>
+              </button>
+              <span style="font-size:.75rem;color:var(--text-muted);font-weight:500;">Séance courte activable</span>
+            </div>
+            <button class="btn-primary" onclick="showToast('📖 Module suivant chargé !')">
+              Module suivant &rarr;
+            </button>
+          </div>
+
+          <!-- Video player -->
+          <div class="video-player mb-6" id="video-player" role="button" tabindex="0" aria-label="Lire la vidéo">
+            <button class="play-btn" aria-label="Lecture">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polygon id="play-icon" points="5,3 19,12 5,21"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Module description -->
+          <div style="background:var(--bg-card);border:1.5px solid var(--border);border-radius:18px;padding:24px 28px;margin-bottom:24px;">
+            <h3 class="section-title" style="margin-bottom:12px;">Module 4 — Docker &amp; conteneurisation</h3>
+            <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.75;font-weight:500;">
+              Dans ce module, vous apprendrez les fondamentaux de Docker : images, conteneurs, volumes et réseaux.
+              Vous construirez votre première image applicative et la déploierez dans un environnement de staging simulé.
+            </p>
+            <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+              <span style="background:rgba(125,232,192,.12);color:#0A6A4A;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:12px;text-transform:uppercase;">Docker</span>
+              <span style="background:rgba(184,169,240,.12);color:var(--navy);font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:12px;text-transform:uppercase;">Conteneurisation</span>
+              <span style="background:rgba(240,122,90,.12);color:var(--salmon);font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:12px;text-transform:uppercase;">Pratique</span>
+            </div>
+          </div>
+
+        </div><!-- /left column -->
+
+        <!-- Right column: modules list -->
+        <div class="sticky-sidebar">
+          <h2 class="section-title">Modules</h2>
+          <div class="modules-list">
+
+            <div class="module-item">
+              <div class="mod-status st-done">✓</div>
+              <div class="mod-info">
+                <p class="mod-name">Introduction &amp; concepts clés</p>
+                <p class="mod-dur">25 min</p>
+              </div>
+              <span class="mod-badge mb-done">Terminé</span>
+            </div>
+
+            <div class="module-item">
+              <div class="mod-status st-done">✓</div>
+              <div class="mod-info">
+                <p class="mod-name">Intégration continue (CI)</p>
+                <p class="mod-dur">40 min</p>
+              </div>
+              <span class="mod-badge mb-done">Terminé</span>
+            </div>
+
+            <div class="module-item">
+              <div class="mod-status st-done">✓</div>
+              <div class="mod-info">
+                <p class="mod-name">Livraison continue (CD)</p>
+                <p class="mod-dur">35 min</p>
+              </div>
+              <span class="mod-badge mb-done">Terminé</span>
+            </div>
+
+            <div class="module-item current">
+              <div class="mod-status st-current">▶</div>
+              <div class="mod-info">
+                <p class="mod-name">Docker &amp; conteneurisation</p>
+                <p class="mod-dur">50 min</p>
+              </div>
+              <span class="mod-badge mb-current">En cours</span>
+            </div>
+
+            <div class="module-item disabled-mod">
+              <div class="mod-status st-upcoming">5</div>
+              <div class="mod-info">
+                <p class="mod-name">Kubernetes — orchestration</p>
+                <p class="mod-dur">55 min</p>
+              </div>
+              <span class="mod-badge mb-upcoming">À venir</span>
+            </div>
+
+            <div class="module-item disabled-mod">
+              <div class="mod-status st-upcoming">6</div>
+              <div class="mod-info">
+                <p class="mod-name">Pipeline CI/CD avec GitLab</p>
+                <p class="mod-dur">45 min</p>
+              </div>
+              <span class="mod-badge mb-upcoming">À venir</span>
+            </div>
+
+            <div class="module-item disabled-mod">
+              <div class="mod-status st-upcoming">7</div>
+              <div class="mod-info">
+                <p class="mod-name">Évaluation finale &amp; certification</p>
+                <p class="mod-dur">20 min</p>
+              </div>
+              <span class="mod-badge mb-upcoming">À venir</span>
+            </div>
+
+          </div><!-- /modules-list -->
+
+          <!-- CTA bottom -->
+          <div style="margin-top:20px;">
+            <button class="btn-primary w-full" onclick="showToast('🚀 Prochaine leçon lancée !')">
+              Continuer l'apprentissage
+            </button>
+          </div>
+        </div><!-- /sidebar -->
+
+      </div><!-- /formation-layout -->
+    </div><!-- /content -->
+  </div><!-- /page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>

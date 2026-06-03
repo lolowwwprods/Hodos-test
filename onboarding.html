@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hodos — Bienvenue</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .ob-btn-row { display: flex; justify-content: center; width: 100%; }
+    .ob-btn-row button:disabled {
+      opacity: .4; cursor: not-allowed; transform: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress bar -->
+  <div class="ob-progress">
+    <div class="ob-progress-fill" id="ob-prog-fill"></div>
+  </div>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle inner-theme-toggle" onclick="toggleTheme()" aria-label="Changer le thème">
+    <span class="theme-toggle-icon">🌙</span>
+    <span class="theme-toggle-label">Mode sombre</span>
+  </button>
+
+  <div class="onboarding-page">
+
+    <!-- Decorative blobs (reuse sp-blob for soft bg) -->
+    <div class="sp-blob1" style="opacity:.4"></div>
+    <div class="sp-blob2" style="opacity:.4"></div>
+
+    <!-- ── Step 1 : Domaine ─────────────────────────────── -->
+    <div class="ob-step active" data-step="1">
+      <p class="ob-indicator">Étape 1 sur 3</p>
+      <h2 class="ob-question">Quel est votre domaine&nbsp;?</h2>
+      <div class="options-grid">
+        <button class="opt-btn" data-value="digital" onclick="obSelect(1,'digital',this)">
+          <span class="opt-icon">💻</span>Digital
+        </button>
+        <button class="opt-btn" data-value="management" onclick="obSelect(1,'management',this)">
+          <span class="opt-icon">📊</span>Management
+        </button>
+        <button class="opt-btn" data-value="technique" onclick="obSelect(1,'technique',this)">
+          <span class="opt-icon">⚙️</span>Technique
+        </button>
+        <button class="opt-btn" data-value="langues" onclick="obSelect(1,'langues',this)">
+          <span class="opt-icon">🌍</span>Langues
+        </button>
+      </div>
+      <div class="ob-btn-row">
+        <button id="ob-next-1" class="btn-primary" onclick="obNext(1)" disabled>
+          Suivant &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Step 2 : Temps ───────────────────────────────── -->
+    <div class="ob-step" data-step="2">
+      <p class="ob-indicator">Étape 2 sur 3</p>
+      <h2 class="ob-question">Combien de temps avez-vous&nbsp;?</h2>
+      <div class="options-grid">
+        <button class="opt-btn" data-value="10" onclick="obSelect(2,'10',this)">
+          <span class="opt-icon">⚡</span>10 min
+        </button>
+        <button class="opt-btn" data-value="30" onclick="obSelect(2,'30',this)">
+          <span class="opt-icon">☕</span>30 min
+        </button>
+        <button class="opt-btn" data-value="60" onclick="obSelect(2,'60',this)" style="grid-column:1/-1;max-width:260px;margin:0 auto;width:100%;">
+          <span class="opt-icon">🎯</span>1h et plus
+        </button>
+      </div>
+      <div class="ob-btn-row">
+        <button id="ob-next-2" class="btn-primary" onclick="obNext(2)" disabled>
+          Suivant &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Step 3 : Objectif ────────────────────────────── -->
+    <div class="ob-step" data-step="3">
+      <p class="ob-indicator">Étape 3 sur 3</p>
+      <h2 class="ob-question">Quel est votre objectif&nbsp;?</h2>
+      <div class="options-grid">
+        <button class="opt-btn" data-value="competence" onclick="obSelect(3,'competence',this)">
+          <span class="opt-icon">📈</span>Monter en compétence
+        </button>
+        <button class="opt-btn" data-value="certification" onclick="obSelect(3,'certification',this)">
+          <span class="opt-icon">🏆</span>Préparer une certification
+        </button>
+        <button class="opt-btn" data-value="explorer" onclick="obSelect(3,'explorer',this)" style="grid-column:1/-1;max-width:260px;margin:0 auto;width:100%;">
+          <span class="opt-icon">🔭</span>Explorer de nouveaux sujets
+        </button>
+      </div>
+      <div class="ob-btn-row">
+        <button id="ob-next-3" class="btn-primary" onclick="obNext(3)" disabled>
+          Terminer
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Success screen ───────────────────────────────── -->
+    <div class="ob-success" id="ob-success">
+      <div class="success-icon">🎉</div>
+      <h2 class="success-title">Votre parcours est prêt !</h2>
+      <p class="success-sub">
+        Nous avons personnalisé vos formations en fonction de vos réponses.<br>
+        Plongez dès maintenant dans votre apprentissage.
+      </p>
+      <a href="dashboard.html" class="btn-primary" style="text-decoration:none;display:inline-block;">
+        Découvrir mon tableau de bord
+      </a>
+    </div>
+
+  </div><!-- /onboarding-page -->
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hodos — Accueil</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="index.html" class="hodos-logo">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+          <circle cx="28" cy="6" r="5" fill="white" stroke="none"/>
+          <path d="M28 11 A22 22 0 1 1 8 43" stroke="white" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M20 20 Q36 20 36 28 Q36 36 20 36" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="hodos-logo-text">Hodos</span>
+      </a>
+    </div>
+
+    <div class="navbar-center">
+      <a href="dashboard.html" class="nav-link active">Formations</a>
+      <a href="dashboard.html" class="nav-link">Parcours</a>
+      <a href="competences.html" class="nav-profile" aria-label="Mon profil">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
+      </a>
+      <a href="competences.html" class="nav-link">Compétences</a>
+      <a href="manager.html" class="nav-link">Manager</a>
+      <a href="#" class="nav-link">Calendrier</a>
+    </div>
+
+    <div class="navbar-right">
+      <button class="theme-toggle" onclick="toggleTheme()" style="position:static;top:auto;right:auto;" aria-label="Changer le thème">
+        <span class="theme-toggle-icon">🌙</span>
+        <span class="theme-toggle-label">Mode sombre</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Page ─────────────────────────────────────────────── -->
+  <div class="page-wrapper">
+
+    <!-- Decorative background shapes -->
+    <div class="bg-deco" aria-hidden="true">
+      <div class="deco-tl"></div>
+      <div class="deco-tr"></div>
+      <div class="deco-br"></div>
+    </div>
+
+    <div class="content">
+
+      <!-- Search bar -->
+      <div class="search-wrap">
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" placeholder="Rechercher une formation" aria-label="Rechercher une formation"/>
+        </div>
+      </div>
+
+      <!-- Section title -->
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 class="page-title">Mes formations en cours</h1>
+          <p class="page-sub">Continuez là où vous vous êtes arrêté</p>
+        </div>
+        <a href="formation.html" class="btn-outline" style="font-size:.78rem;padding:10px 22px;">
+          Voir tout le catalogue
+        </a>
+      </div>
+
+      <!-- Cards -->
+      <div class="cards-grid">
+
+        <!-- Card 1 — DevOps -->
+        <a href="formation.html" class="formation-card">
+          <span class="card-tag tag-digital">Digital</span>
+          <h2 class="card-title">Introduction au DevOps & CI/CD</h2>
+          <p class="card-meta">4h 30min &nbsp;·&nbsp; 7 modules</p>
+          <div class="card-progress">
+            <div class="prog-row">
+              <span class="prog-label">Progression</span>
+              <span class="prog-pct">65%</span>
+            </div>
+            <div class="prog-bar">
+              <div class="prog-fill" data-w="65%"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 2 — Agile -->
+        <a href="formation.html?f=agile" class="formation-card">
+          <span class="card-tag tag-management">Management</span>
+          <h2 class="card-title">Management de projet Agile &amp; Scrum</h2>
+          <p class="card-meta">3h 00min &nbsp;·&nbsp; 5 modules</p>
+          <div class="card-progress">
+            <div class="prog-row">
+              <span class="prog-label">Progression</span>
+              <span class="prog-pct">30%</span>
+            </div>
+            <div class="prog-bar">
+              <div class="prog-fill p-lilas" data-w="30%"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3 — Anglais -->
+        <a href="formation.html?f=anglais" class="formation-card">
+          <span class="card-tag tag-langues">Langues</span>
+          <h2 class="card-title">Anglais technique pour ingénieurs</h2>
+          <p class="card-meta">2h 45min &nbsp;·&nbsp; 6 modules</p>
+          <div class="card-progress">
+            <div class="prog-row">
+              <span class="prog-label">Progression</span>
+              <span class="prog-pct">85%</span>
+            </div>
+            <div class="prog-bar">
+              <div class="prog-fill p-salmon" data-w="85%"></div>
+            </div>
+          </div>
+        </a>
+
+      </div><!-- /cards-grid -->
+
+      <!-- Suggested formations -->
+      <div style="margin-top:48px;">
+        <h2 class="section-title">Recommandées pour vous</h2>
+        <div class="cards-grid">
+
+          <a href="formation.html?f=cyber" class="formation-card" style="min-height:180px;opacity:.85;">
+            <span class="card-tag tag-technique">Technique</span>
+            <h2 class="card-title">Fondamentaux de la cybersécurité</h2>
+            <p class="card-meta">5h 00min &nbsp;·&nbsp; 8 modules</p>
+          </a>
+
+          <a href="formation.html?f=leadership" class="formation-card" style="min-height:180px;opacity:.85;">
+            <span class="card-tag tag-management">Management</span>
+            <h2 class="card-title">Leadership &amp; prise de décision</h2>
+            <p class="card-meta">2h 30min &nbsp;·&nbsp; 4 modules</p>
+          </a>
+
+          <a href="formation.html?f=python" class="formation-card" style="min-height:180px;opacity:.85;">
+            <span class="card-tag tag-digital">Digital</span>
+            <h2 class="card-title">Python pour l'ingénierie des données</h2>
+            <p class="card-meta">6h 00min &nbsp;·&nbsp; 10 modules</p>
+          </a>
+
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>
