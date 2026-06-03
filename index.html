@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +7,70 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%; height: 100%; overflow: hidden;
-    }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
 
     body {
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Montserrat', sans-serif;
+      transition: background 0.4s;
+    }
 
-      /*
-        3 radial-gradient positionnés aux coins du viewport :
-          - Salmon  : haut-gauche
-          - Lilas   : haut-droite
-          - Mint    : bas-gauche
-        Chaque ellipse part du coin (center at 0%/100%) et
-        s'estompe vers transparent. Fond blanc pur derrière.
-      */
+    /* ══════════════════════════════════════════
+       MODE CLAIR
+    ══════════════════════════════════════════ */
+    [data-theme="light"] body {
       background:
-        radial-gradient(ellipse 40% 50% at   0%   0%, rgba(240, 122,  90, 0.30) 0%, rgba(240, 122,  90, 0) 100%),
-        radial-gradient(ellipse 38% 48% at 100%   0%, rgba(184, 169, 240, 0.26) 0%, rgba(184, 169, 240, 0) 100%),
-        radial-gradient(ellipse 55% 50% at   0% 100%, rgba(125, 232, 192, 0.25) 0%, rgba(125, 232, 192, 0) 100%),
+        radial-gradient(ellipse 40% 50% at   0%   0%, rgba(240,122, 90, 0.30) 0%, rgba(240,122, 90,0) 100%),
+        radial-gradient(ellipse 38% 48% at 100%   0%, rgba(184,169,240, 0.26) 0%, rgba(184,169,240,0) 100%),
+        radial-gradient(ellipse 55% 50% at   0% 100%, rgba(125,232,192, 0.25) 0%, rgba(125,232,192,0) 100%),
         #ffffff;
     }
 
-    /* ── Logo + bouton centrés ──────────────────────────── */
+    /* Logo couleur naturelle (navy) en mode clair */
+    [data-theme="light"] .logo-img {
+      filter: none;
+    }
+
+    /* ══════════════════════════════════════════
+       MODE SOMBRE — fond + formes géométriques
+    ══════════════════════════════════════════ */
+    [data-theme="dark"] body {
+      background: #1B2A6B;
+    }
+
+    /* Formes géométriques dark */
+    .dark-shape { display: none; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    [data-theme="dark"] .dark-shape { display: block; }
+
+    .ds-teal {
+      background: linear-gradient(150deg, #3EC9C9 0%, #2AADAD 100%);
+      clip-path: polygon(0 0, 66% 0, 40% 100%, 0 100%);
+      opacity: 0.82;
+    }
+    .ds-mauve {
+      background: #8B6070;
+      clip-path: polygon(63% 0, 100% 0, 100% 40%);
+      opacity: 0.82;
+    }
+    .ds-lavender {
+      background: linear-gradient(160deg, #5A5FA4 0%, #474C8E 100%);
+      clip-path: polygon(57% 54%, 100% 42%, 100% 100%, 40% 100%);
+      opacity: 0.78;
+    }
+
+    /* Logo blanc en dark mode via filtre CSS */
+    [data-theme="dark"] .logo-img {
+      filter: brightness(0) invert(1);
+    }
+
+    /* ══════════════════════════════════════════
+       CONTENU
+    ══════════════════════════════════════════ */
     .wrap {
+      position: relative;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -42,36 +78,119 @@
     }
 
     .logo-img {
-      height: 80px;
+      height: 100px;   /* agrandi */
       width: auto;
       display: block;
+      transition: filter 0.3s;
     }
 
-    button {
+    /* ══════════════════════════════════════════
+       BOUTON SE CONNECTER
+    ══════════════════════════════════════════ */
+    .btn-connect {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 0.85rem;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #ffffff;
-      background: #1B2A6B;
-      border: none;
       border-radius: 50px;
       padding: 18px 62px;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(27, 42, 107, 0.25);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
     }
-    button:hover {
+
+    [data-theme="light"] .btn-connect {
+      background: #1B2A6B;
+      color: #fff;
+      border: 2.5px solid #1B2A6B;
+      box-shadow: 0 4px 20px rgba(27,42,107, 0.25);
+    }
+    [data-theme="light"] .btn-connect:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(27, 42, 107, 0.35);
+      box-shadow: 0 8px 28px rgba(27,42,107, 0.35);
     }
+
+    [data-theme="dark"] .btn-connect {
+      background: transparent;
+      color: #fff;
+      border: 2.5px solid #fff;
+      box-shadow: none;
+    }
+    [data-theme="dark"] .btn-connect:hover {
+      background: rgba(255,255,255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* ══════════════════════════════════════════
+       TOGGLE THÈME
+    ══════════════════════════════════════════ */
+    .toggle {
+      position: fixed;
+      top: 20px; right: 22px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s;
+    }
+    [data-theme="light"] .toggle {
+      background: rgba(27,42,107, 0.07);
+      border: 1.5px solid rgba(27,42,107, 0.15);
+      color: #1B2A6B;
+    }
+    [data-theme="dark"] .toggle {
+      background: rgba(255,255,255, 0.12);
+      border: 1.5px solid rgba(255,255,255, 0.22);
+      color: #fff;
+    }
+    .toggle:hover { transform: scale(1.04); }
   </style>
 </head>
 <body>
+
+  <!-- Formes dark mode -->
+  <div class="dark-shape ds-teal"></div>
+  <div class="dark-shape ds-mauve"></div>
+  <div class="dark-shape ds-lavender"></div>
+
+  <!-- Toggle -->
+  <button class="toggle" onclick="toggleTheme()">
+    <span id="toggle-icon">🌙</span>
+    <span id="toggle-label">Mode sombre</span>
+  </button>
+
+  <!-- Contenu -->
   <div class="wrap">
     <img class="logo-img" src="logo.png" alt="Hodos">
-    <button onclick="window.location.href='onboarding.html'">SE CONNECTER</button>
+    <button class="btn-connect" onclick="window.location.href='onboarding.html'">
+      SE CONNECTER
+    </button>
   </div>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem('hodos-theme') || 'light';
+      applyTheme(saved);
+    })();
+
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme');
+      applyTheme(cur === 'light' ? 'dark' : 'light');
+    }
+
+    function applyTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('hodos-theme', t);
+      document.getElementById('toggle-icon').textContent  = t === 'light' ? '🌙' : '☀️';
+      document.getElementById('toggle-label').textContent = t === 'light' ? 'Mode sombre' : 'Mode clair';
+    }
+  </script>
 </body>
 </html>
